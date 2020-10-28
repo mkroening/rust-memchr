@@ -128,6 +128,9 @@ jobs:
     - if: matrix.build == 'nightly'
       name: Run benchmarks as tests
       run: cargo bench --manifest-path bench/Cargo.toml --verbose -- --test
+    - if: matrix.build == 'nightly'
+      name: Build on non-SSE target
+      run: cargo build -Z build-std=core --target=src/tests/x86_64-soft_float.json --verbose --no-default-features
 
   test-with-miri:
     name: test with miri
